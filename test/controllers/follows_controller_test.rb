@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class FollowTest < ActiveSupport::TestCase
+class FollowsControllerTest < ActionDispatch::IntegrationTest
   # test "the truth" do
   #   assert true
   # end

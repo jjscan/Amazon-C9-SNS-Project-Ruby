@@ -3,6 +3,10 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby '2.4.1'
 
+# mini_magick install
+gem 'mini_magick'
+# Carrierwave install
+gem 'carrierwave'
 # Rails 5 gem 'devise', git: 'https://github.com/plataformatec/devise.git'
 gem 'devise', git: 'https://github.com/plataformatec/devise.git'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'

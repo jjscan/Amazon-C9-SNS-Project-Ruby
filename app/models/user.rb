@@ -1,9 +1,11 @@
 class User < ApplicationRecord
+  # carrierwave (image uploader)
+  mount_uploader :profile, ProfileUploader
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
-         
+  
   # 코멘트, 포스트, 좋아요 기능 Relations 정의
   has_many :comments
   has_many :posts

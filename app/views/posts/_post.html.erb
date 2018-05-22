@@ -16,6 +16,15 @@
 		<% else %>
 		<% end %>
 		<p class="pre-line"><%= post.content %></p>
+		
+		<div class="card post" data-post-id="<%= post.id %>">
+			<div class="card-image">
+				<% if post.image.url %>
+					<img src="<%= post.image.url %>" />
+				<% end %>
+			</div>
+		</div>
+		
 	</div>
 
 	<div class="card-action">
@@ -54,4 +63,5 @@
 		<% end %>
 		
 	</div>
+
 </div>

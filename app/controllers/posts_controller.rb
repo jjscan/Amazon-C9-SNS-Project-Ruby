@@ -11,6 +11,8 @@ class PostsController < ApplicationController
   end
 
   def create new_post = Post.new(user_id: current_user.id, content: params[:content])
+    # params[:image]를 받아서 image 컬럼에 추가
+    new_post = Post.new(user_id: current_user.id, content: params[:content], image: params[:image])
     if new_post.save
       redirect_to root_path
     else

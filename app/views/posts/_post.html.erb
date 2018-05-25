@@ -1,6 +1,10 @@
 <div class="card">
 	<div class="card-content">
-		<span class="card-title"><%= post.user.name %></span>
+		<!-- 유저 이미지 썸네일 출력 -->
+		<% if post.user.profile %>
+			<img class="circle thumbnail" src="<%= post.user.profile.thumb.url %>" />
+		<% end %>
+		<span class="card-title"> <%= post.user.name %> </span>
 		<span><%= post.created_at %></span>
 		<% if user_signed_in? && current_user != post.user %>
 			<% if current_user.followings.include?(post.user) %>

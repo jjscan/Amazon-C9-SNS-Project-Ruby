@@ -1,7 +1,12 @@
 class ProfileUploader < CarrierWave::Uploader::Base
   # Include RMagick or MiniMagick support:
   # include CarrierWave::RMagick
-  # include CarrierWave::MiniMagick
+  include CarrierWave::MiniMagick
+  
+  # thumb 버전은 32 x 32의 사이즈를 유지
+  version :thumb do
+    process :resize_to_limit => [32, 32]
+  end
 
   # Choose what kind of storage to use for this uploader:
   storage :file

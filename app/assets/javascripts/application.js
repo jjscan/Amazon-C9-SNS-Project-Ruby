@@ -12,9 +12,13 @@
 //
 //= require rails-ujs
 //= require activestorage
+//= require materialize
 //= require materialize-sprockets
 //= require_tree .
-
+//= require jquery
+//= require jquery_ujs
 $(document).ready(function(){
     $(".button-collapse").sideNav();
+    $(".dropdown-trigger").dropdown();
  });
+ 

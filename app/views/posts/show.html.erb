@@ -26,20 +26,14 @@ li {background: black;}
   </div>
   <div class="w3-bar-block">
     
-  	<a href="#" class="w3-bar-item w3-button w3-padding"><i class="fa fa-user fa-fw w3-margin-right"></i>User name:&nbsp;<%= current_user.name %><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Email: <%= current_user.email %> </a>
-  	<a href="/posts/new" class="w3-bar-item w3-button w3-padding"><i class="fa fa-clipboard fa-fw w3-margin-right"></i>Post</a>
-  	<a href="/mypage" class="w3-bar-item w3-button w3-padding"><i class="fa fa-file w3-margin-right"></i>Mypage</a>
-    <a href="/users/edit" class="w3-bar-item w3-button w3-padding"><i class="fa fa-edit w3-margin-right"></i>edit</a>
-    <a href="#" onclick="w3_close()" class="w3-bar-item w3-button w3-padding w3-text-teal"><i class="fa fa-users fa-fw w3-margin-right"></i>Following : <%= current_user.followings.length %></a> 
-    <a href="#" onclick="w3_close()" class="w3-bar-item w3-button w3-padding w3-text-teal"><i class="fa fa-users fa-fw w3-margin-right"></i>Followers : <%= current_user.followers.length %></a> 
-    <a href="#" onclick="w3_close()" class="w3-bar-item w3-button w3-padding"><i class="fa fa-user fa-fw w3-margin-right"></i>Postings : <%= @posts_count %></a> 
+  	
 
   	        <ul class="w3-bar-item w3-button w3-padding  w3-text-teal">
   	          
           <% if user_signed_in? %>
             <li><%= link_to 'Sign out', destroy_user_session_path, method: 'delete' %></li><br>
           <% else %>
-            <li><%= link_to 'Sign in', new_user_session_path, method: 'get' %></li><br>
+            <li><%= link_to 'Sign in', new_user_session_path, method: 'get' %></li><br><br>
             <li><%= link_to 'Sign up', new_user_registration_path, method: 'get' %></li><br>
           <% end %>
         </ul>
@@ -52,27 +46,20 @@ li {background: black;}
 <div class="w3-overlay w3-hide-large w3-animate-opacity" onclick="w3_close()" style="cursor:pointer" title="close side menu" id="myOverlay"></div>
 
 <!-- !PAGE CONTENT! -->
-<div class="w3-main" style="margin-left:370px; margin-right:470px">
+<div class="w3-main" style="margin-left:500px; margin-right:470px">
 
   <!-- Header -->
   <header id="portfolio">
 
     <span class="w3-button w3-hide-large w3-xxlarge w3-hover-text-grey" onclick="w3_open()"><i class="fa fa-bars"></i></span>
     <div class="w3-container">
-    <h1><b>My Posts</b></h1>
+    <h1><b>Posts</b></h1>
     <div class="w3-section w3-bottombar w3-padding-100">
 
     </div>
     </div>
   </header>
   
-  <!-- First Photo Grid-->
-		<div class="col s120 m80">
-			<% @posts.each do |post| %>
-				<%= render partial: "post", object: post %>
-			<% end %>
-		</div>
-
 
 
 <script>
@@ -90,3 +77,41 @@ function w3_close() {
 
 </body>
 </html>
+
+<div class="container">
+    <div class="row">
+        <div class="col s120 m80">
+            <% @shows.each do |post| %>
+                <div class="card">
+                <div class="card-content">
+                    <% if post.user.profile %>
+                    <img class="circle thumbnail" src="<%= post.user.profile.thumb.url %>"
+                    <% end %>
+                      <span class="card-title"><%= post.user.name %></span>
+                      <span><%= post.created_at %></span>
+                   <div class="card-image">
+                     <% if post.image.url %>
+                       <img src="<%= post.image.url %>">
+                     <% end %>
+                   </div>
+                   <p class="pre-line"><%= post.content %></p>
+                </div>
+            
+                <div class="card-action">
+                    <% if post.comments.present? %>
+                      <ul class="collection">
+                      <% post.comments.each do |comment| %>
+                        <li class="collection-item">
+                          <span class="title"><%= comment.user.name %></span>
+                          <span class="right"><%= comment.created_at %></span>
+                          <p class="pre-line"><%= comment.content %></p>
+                        </li>
+                      <% end %>
+                      </ul>
+                    <% end %>
+                </div>
+                </div>
+            <% end %>
+        </div>
+    </div>
+</div> 

@@ -11,24 +11,7 @@
   </head>
 
   <body>
-    <nav>
-      <div class="nav-wrapper">
-        <a href="/" class="brand-logo">Software Engineering Project</a>
-        <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
-        <ul class="right hide-on-med-and-down">
-          <li><a href="/posts">Post</a></li>
-          <% if user_signed_in? %>
-            <li><%= current_user.name %> </li>
-            <li><%= link_to 'Sign out', destroy_user_session_path, method: 'delete' %></li>
-            <li><%= link_to 'Edit', edit_user_registration_path, method: 'get' %></li>
-            <li><a href="/mypage">Mypage</a></li>
-          <% else %>
-            <li><%= link_to 'Sign in', new_user_session_path, method: 'get' %></li>
-            <li><%= link_to 'Sign up', new_user_registration_path, method: 'get' %></li>
-          <% end %>
-        </ul>
-      </div>
-    </nav>
+   <body background="https://www.digitalplatforms.co.za/wp-content/uploads/2015/11/Website-Design-Background.png">
   
     <ul class="sidenav" id="mobile-demo">
           <li><a href="/posts">Post</a></li>

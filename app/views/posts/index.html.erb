@@ -1,92 +1,84 @@
 <!DOCTYPE html>
 <html>
+<title>소프트웨어공학설계 정진섭&이창배</title>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <style>
-body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", sans-serif}
-a {font-size: 12pt;}
-li {background: black;}
-
+  div,body,h1,h2,h3,h4,h5,a{font-family: "Raleway", sans-serif}
+  a {font-size: 20px;}
+  .topnav-right {
+    float: right;
+  }
 </style>
-<body class="w3-light-grey w3-content" style="max-width:1600px">
-<body background="https://www.digitalplatforms.co.za/wp-content/uploads/2015/11/Website-Design-Background.png">
-  
-  
-<!-- Sidebar/menu -->
-<nav class="w3-sidebar w3-collapse w3-white w3-animate-left" style="z-index:3;width:300px;" id="mySidebar"><br>
-  <div class="w3-container">
-    <a href="#" onclick="w3_close()" class="w3-hide-large w3-right w3-jumbo w3-padding w3-hover-grey" title="close menu">
-      <i class="fa fa-remove"></i>
-    </a>
 
-    <h4><b>MENU</b></h4>
-  </div>
-  <div class="w3-bar-block">
-    
-  	<a href="#" class="w3-bar-item w3-button w3-padding"><i class="fa fa-user fa-fw w3-margin-right"></i>User name:&nbsp;<%= current_user.name %><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Email: <%= current_user.email %> </a>
-  	<a href="/posts/new" class="w3-bar-item w3-button w3-padding"><i class="fa fa-clipboard fa-fw w3-margin-right"></i>Post</a>
-  	<a href="/mypage" class="w3-bar-item w3-button w3-padding"><i class="fa fa-file w3-margin-right"></i>Mypage</a>
-    <a href="/users/edit" class="w3-bar-item w3-button w3-padding"><i class="fa fa-edit w3-margin-right"></i>edit</a>
-    <a href="#" onclick="w3_close()" class="w3-bar-item w3-button w3-padding w3-text-teal"><i class="fa fa-users fa-fw w3-margin-right"></i>Following : <%= current_user.followings.length %></a> 
-    <a href="#" onclick="w3_close()" class="w3-bar-item w3-button w3-padding w3-text-teal"><i class="fa fa-users fa-fw w3-margin-right"></i>Followers : <%= current_user.followers.length %></a> 
-    <a href="#" onclick="w3_close()" class="w3-bar-item w3-button w3-padding"><i class="fa fa-user fa-fw w3-margin-right"></i>Postings : <%= @posts_count %></a> 
-
-  	        <ul class="w3-bar-item w3-button w3-padding  w3-text-teal">
-  	          
-          <% if user_signed_in? %>
-            <li><%= link_to 'Sign out', destroy_user_session_path, method: 'delete' %></li><br>
-          <% else %>
-            <li><%= link_to 'Sign in', new_user_session_path, method: 'get' %></li><br>
-            <li><%= link_to 'Sign up', new_user_registration_path, method: 'get' %></li><br>
-          <% end %>
-        </ul>
-
-  </div>
-
-</nav>
-
-<!-- Overlay effect when opening sidebar on small screens -->
-<div class="w3-overlay w3-hide-large w3-animate-opacity" onclick="w3_close()" style="cursor:pointer" title="close side menu" id="myOverlay"></div>
-
-<!-- !PAGE CONTENT! -->
-<div class="w3-main" style="margin-left:370px; margin-right:470px">
-
-  <!-- Header -->
-  <header id="portfolio">
-
-    <span class="w3-button w3-hide-large w3-xxlarge w3-hover-text-grey" onclick="w3_open()"><i class="fa fa-bars"></i></span>
+<body class="w3-light-grey" background="https://www.digitalplatforms.co.za/wp-content/uploads/2015/11/Website-Design-Background.png">
+  <div class="w3-content" style="max-width:1400px">
+    <!-- Navigation Bar --> 
     <div class="w3-container">
-    <h1><b>My Posts</b></h1>
-    <div class="w3-section w3-bottombar w3-padding-100">
-
+      <div class="w3-bar w3-black">
+        <a href="/" class="w3-bar-item w3-button">Software Engineering Project Team 19 "Jinseop Jeong & Changbae Lee"</a>
+        <div class="topnav-right">
+          <a href="/" class="w3-bar-item w3-button">Home</a>
+          <a href="/posts" class="w3-bar-item w3-button">Posts</a>
+          <% if user_signed_in? %>
+            <a href="/mypage" class="w3-bar-item w3-button">Mypage</a>
+            <div class="w3-dropdown-hover">
+              <button class="w3-button"><%= current_user.name %></button>
+              <div class="w3-dropdown-content w3-bar-block w3-card-4">
+                <%= link_to 'Sign out', destroy_user_session_path, method: 'delete', class:"w3-bar-item w3-button" %>
+                <%= link_to 'Account Edit', edit_user_registration_path, method: 'get', class:"w3-bar-item w3-button" %>
+              </div>
+            </div>
+          <% else %>
+            <%= link_to 'Sign in', new_user_session_path, method: 'get', class:"w3-bar-item w3-button" %>
+            <%= link_to 'Sign up', new_user_registration_path, method: 'get', class:"w3-bar-item w3-button" %>
+          <% end %>
+        </div>
+      </div>
     </div>
+    <!-- Navigation Bar End -->
+    
+    <!-- Grid -->
+    <div class="w3-row">
+      <!-- Blog entry -->
+      <div class="w3-col l8 s12">
+        <div class="w3-card-4 w3-margin w3-white">
+          <!-- <img src="/w3images/woods.jpg" alt="Nature" style="width:100%"> -->
+      
+          <div class="w3-container">
+            <% @posts.each do |post| %>
+            <%= render partial: "post", object: post %>
+            <% end %>
+          </div>
+        </div>
+        <hr>
+      </div>
+      <!-- End Blog entry -->
+      
+      <!-- Introduction menu -->
+      <div class="w3-col l4">
+        <!-- About Card -->
+        <div class="w3-card w3-margin w3-margin-top">
+        <img src="<%= current_user.profile.url %>" style="width:100%"/>
+          <div class="w3-container w3-white">
+          	User name:&nbsp;<%= current_user.name %>
+					<p>이메일 : <%= current_user.email %></p>
+					<p>올린 글 개수 : <%= @posts_count %></p>
+					<p>팔로워 : <%= current_user.followers.length %></p>
+					<p>팔로잉 : <%= current_user.followings.length %></p>
+					<%= link_to new_post_path do %>
+						<button class="btn">글쓰기</button>
+					<% end %>
+					<p></p>
+          </div>
+        </div><hr>
+      </div>
+      <!-- End -->
     </div>
-  </header>
-  
-  <!-- First Photo Grid-->
-		<div class="col s120 m80">
-			<% @posts.each do |post| %>
-				<%= render partial: "post", object: post %>
-			<% end %>
-		</div>
-
-
-
-<script>
-// Script to open and close sidebar
-function w3_open() {
-    document.getElementById("mySidebar").style.display = "block";
-    document.getElementById("myOverlay").style.display = "block";
-}
- 
-function w3_close() {
-    document.getElementById("mySidebar").style.display = "none";
-    document.getElementById("myOverlay").style.display = "none";
-}
-</script>
-
+    <!-- End Grid -->
+    
+  </div>
 </body>
 </html>

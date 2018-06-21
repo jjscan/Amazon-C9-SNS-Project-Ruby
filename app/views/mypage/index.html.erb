@@ -1,36 +1,92 @@
+<!DOCTYPE html>
+<html>
+<title>소프트웨어공학설계 정진섭&이창배</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
+<style>
+  div,body,h1,h2,h3,h4,h5,a{font-family: "Raleway", sans-serif}
+  a {font-size: 20px;}
+  .topnav-right {
+    float: right;
+  }
+</style>
 
-<div class="container">
-	<div class="row">
-		<div class="col s12 m4">
-			<div class="card">
-				<div class="card user-info">
-					<% unless current_user.profile.url.nil? %>
-					<div class="card-image">
-						<img src="<%= current_user.profile.url %>" />
-					</div>
-					<% end %>
-				</div>
-				<div class="card-content">
-					<div class="card-title"><%= current_user.name %></div>
-					<p>이메일 : <%= current_user.email %></p>
-					<p>올린 글 개수 : <%= @posts_count %></p>
-					<p>팔로워 : <%= current_user.followers.length %></p>
-					<p>팔로잉 : <%= current_user.followings.length %></p>
-					<%= link_to new_post_path do %>
-						<button class="btn">글쓰기</button>
-					<% end %>
-					<a href="../"><%= button_tag "Back", class: "btn" %></a>
-				</div>
-			</div>
-		</div>
-		<div class="col s12 m8">
+<body class="w3-light-grey" background="https://www.digitalplatforms.co.za/wp-content/uploads/2015/11/Website-Design-Background.png">
+  <div class="w3-content" style="max-width:1400px">
+    <!-- Navigation Bar --> 
+    <div class="w3-container">
+      <div class="w3-bar w3-black">
+        <div class="topnav-right">
+          <a href="/" class="w3-bar-item w3-button">Home</a>
+          <a href="/posts" class="w3-bar-item w3-button">Posts</a>
+          <% if user_signed_in? %>
+            <a href="/mypage" class="w3-bar-item w3-button">Mypage</a>
+            <div class="w3-dropdown-hover">
+              <button class="w3-button"><%= current_user.name %></button>
+              <div class="w3-dropdown-content w3-bar-block w3-card-4">
+                <%= link_to 'Sign out', destroy_user_session_path, method: 'delete', class:"w3-bar-item w3-button" %>
+                <%= link_to 'Account Edit', edit_user_registration_path, method: 'get', class:"w3-bar-item w3-button" %>
+              </div>
+            </div>
+          <% else %>
+            <%= link_to 'Sign in', new_user_session_path, method: 'get', class:"w3-bar-item w3-button" %>
+            <%= link_to 'Sign up', new_user_registration_path, method: 'get', class:"w3-bar-item w3-button" %>
+          <% end %>
+        </div>
+      </div>
+    </div>
+    <!-- Navigation Bar End -->
+    
+    <!-- Grid -->
+    <div class="w3-row">
+      <!-- Blog entry -->
+      <div class="w3-col l8 s12">
+        <div class="w3-card-4 w3-margin w3-white">
+          <!-- <img src="/w3images/woods.jpg" alt="Nature" style="width:100%"> -->
+      
+          <div class="w3-container">
 		    <% @follow.each do |mypage| %>
     			<% @posts.each do |post| %>
-        			<% if current_user == post.user || mypage.followed_id == post.user_id %>
+        			<% if mypage.followed_id == post.user_id  %>
         				<%= render partial: "post", object: post %>
         			<% end %>
 			    <% end %>
 			<% end %>
-		</div>
-	</div>
-</div>
+			<% @posts.each do |post| %>
+				<% if current_user == post.user %>
+					<%= render partial: "post", object: post %>
+				<% end %>
+			<% end %>
+          </div>
+        </div>
+        <hr>
+      </div>
+      <!-- End Blog entry -->
+      
+      <!-- Introduction menu -->
+      <div class="w3-col l4">
+        <!-- About Card -->
+        <div class="w3-card w3-margin w3-margin-top">
+        <img src="<%= current_user.profile.url %>" style="width:100%"/>
+          <div class="w3-container w3-white">
+          	User name:&nbsp;<%= current_user.name %>
+			<p>이메일 : <%= current_user.email %></p>
+			<p>올린 글 개수 : <%= @posts_count %></p>
+			<p>팔로워 : <%= current_user.followers.length %></p>
+			<p>팔로잉 : <%= current_user.followings.length %></p>
+			<%= link_to new_post_path do %>
+				<button class="btn">글쓰기</button>
+			<% end %>
+			<p></p>
+          </div>
+        </div><hr>
+      </div>
+      <!-- End -->
+    </div>
+    <!-- End Grid -->
+    
+  </div>
+</body>
+</html>
